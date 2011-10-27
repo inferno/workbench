@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = Workbench::VERSION
   s.authors     = ["Konstantin Savelyev"]
   s.email       = ["konstantin.savelyev@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.homepage    = "http://lenta.ru"
+  s.summary     = "A quick web server for prototyping."
+  s.description = "A quick web server for prototyping."
 
   s.rubyforge_project = "workbench"
 
@@ -20,5 +20,11 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_dependency "rack"
+	s.add_dependency "unicorn"
+	s.add_dependency "haml"
+	s.add_dependency "compass"
+	s.add_dependency "rack-asset-compiler"
+	s.add_dependency "rack-cache"
+	s.add_dependency "fastimage"
 end
