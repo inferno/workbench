@@ -37,7 +37,7 @@ app = Rack::Builder.new {
 
 	use Rack::Static, :urls => ['/css', '/js', '/img'], :root => './public'
 
-	run Server.new
+	run Workbench::Server.new
 }.to_app
 
 Unicorn::HttpServer.new(app, {
