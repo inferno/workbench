@@ -10,8 +10,9 @@ app = Rack::Builder.new {
 	use Rack::CommonLogger
 	use Rack::ShowExceptions
 	use Rack::ContentLength
-	use Rack::Cache,
-			:verbose => false
+
+	#use Rack::Cache,
+	#		:verbose => false
 
 	sass_options = {
 		:cache => true,
@@ -34,14 +35,14 @@ app = Rack::Builder.new {
 	end
 
 	use Rack::SassCompiler,
-			:source_dir => File.join($root, 'sass'),
-			:url => '/css',
-			:sass_options => sass_options
+		:source_dir => File.join($root, 'sass'),
+		:url => '/css',
+		:sass_options => sass_options
 
 	use Rack::SassCompiler,
-			:source_dir => File.join($root, 'sass'),
-			:url => '/css',
-			:sass_options => sass_options.merge({ :syntax => :scss })
+		:source_dir => File.join($root, 'sass'),
+		:url => '/css',
+		:sass_options => sass_options.merge({ :syntax => :scss })
 
 
 	use Rack::Static, :urls => ['/css', '/js', '/img'], :root => './public'
