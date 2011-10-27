@@ -3,10 +3,6 @@ require "workbench/dependencies"
 require 'workbench/server'
 require 'workbench/haml_helpers'
 
-#module Workbench
-#  # Your code goes here...
-#end
-
 $root = ENV['PWD']
 
 app = Rack::Builder.new {
