@@ -20,6 +20,19 @@ app = Rack::Builder.new {
 		:style => :compact
 	}
 
+	Compass.configuration do |config|
+		config.project_path = $root
+		config.http_path = '/'
+		config.http_images_path = '/img'
+		config.http_stylesheets_path = '/css'
+		config.http_javascripts_path = '/js'
+		config.sass_dir = 'sass'
+		config.css_dir = 'public/css'
+		config.images_dir = 'public/img'
+		config.javascripts_dir = 'public/js'
+		config.relative_assets = false
+	end
+
 	use Rack::SassCompiler,
 			:source_dir => File.join($root, 'sass'),
 			:url => '/css',
