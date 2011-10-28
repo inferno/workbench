@@ -27,10 +27,10 @@ module Workbench
 
 		def resolve_template path
 			template = File.join($root, 'haml', path)
-			unless File.exists?(template)
-				template = File.join($root, 'haml', File.dirname(path), File.basename(path, File.extname(path)) + '.haml')
-			end
-			template
+			#unless File.exists?(template)
+			#	template = File.join($root, 'haml', File.dirname(path), File.basename(path, File.extname(path)) + '.haml')
+			#end
+			#template
 		end
 
 	end

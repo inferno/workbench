@@ -10,16 +10,7 @@ app = Rack::Builder.new {
 	use Rack::CommonLogger
 	use Rack::ShowExceptions
 	use Rack::ContentLength
-
-	#use Rack::Cache,
-	#		:verbose => false
-
-	sass_options = {
-		:cache => true,
-		:cache_store => Sass::CacheStores::Memory.new,
-		:syntax => :sass,
-		:style => :compact
-	}
+	use Rack::ShowStatus
 
 	Compass.configuration do |config|
 		config.project_path = $root
@@ -32,19 +23,13 @@ app = Rack::Builder.new {
 		config.images_dir = 'public/img'
 		config.javascripts_dir = 'public/js'
 		config.relative_assets = false
+		config.output_style = :compact
+		config.line_comments = false
 	end
 
-	use Rack::SassCompiler,
-		:source_dir => File.join($root, 'sass'),
-		:url => '/css',
-		:sass_options => sass_options
+	Compass.configure_sass_plugin!
 
-	use Rack::SassCompiler,
-		:source_dir => File.join($root, 'sass'),
-		:url => '/css',
-		:sass_options => sass_options.merge({ :syntax => :scss })
-
-
+	use Sass::Plugin::Rack
 	use Rack::Static, :urls => ['/css', '/js', '/img'], :root => './public'
 
 	run Workbench::Server.new
