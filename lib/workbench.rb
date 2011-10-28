@@ -10,7 +10,6 @@ app = Rack::Builder.new {
 	use Rack::CommonLogger
 	use Rack::ShowExceptions
 	use Rack::ContentLength
-	use Rack::ShowStatus
 
 	Compass.configuration do |config|
 		config.project_path = $root
