@@ -25,4 +25,5 @@ Gem::Specification.new do |s|
 	s.add_dependency "rack-asset-compiler"
 	s.add_dependency "rack-cache"
 	s.add_dependency "fastimage"
+	s.add_dependency "rack-contrib"
 end

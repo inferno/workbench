@@ -29,7 +29,7 @@ app = Rack::Builder.new {
 	Compass.configure_sass_plugin!
 
 	use Sass::Plugin::Rack
-	use Rack::Static, :urls => ['/css', '/js', '/img'], :root => './public'
+	use Rack::StaticCache, :urls => [ '/css', '/js', '/img' ], :root => './public'
 
 	run Workbench::Server.new
 }.to_app
