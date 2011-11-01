@@ -5,6 +5,7 @@ module Workbench
 		def call(env)
 			req = Rack::Request.new(env)
 			file = File.join($root, 'haml', '/' == req.path ? 'index.haml' : req.path)
+			$file = file
 			ext = File.extname(file)
 			if ext.empty?
 				file = file + '.haml'
