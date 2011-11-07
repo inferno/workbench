@@ -26,4 +26,5 @@ Gem::Specification.new do |s|
 	s.add_dependency "rack-cache"
 	s.add_dependency "fastimage"
 	s.add_dependency "rack-contrib"
+	s.add_dependency "thor"
 end
