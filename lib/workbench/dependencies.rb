@@ -1,6 +1,5 @@
 require 'unicorn'
 require 'haml'
-require 'fastimage'
 require 'sass/plugin/rack'
 require 'compass'
 require 'rack/contrib'
