@@ -9,7 +9,7 @@ module Workbench
 		def initialize *args
 			super
 			@js_library = {
-				'jquery' 				=> 'http://code.jquery.com/jquery.min.js',
+				'jquery' 				=> 'http://code.jquery.com/jquery.js',
 				'jquery-ui' 		=> 'http://yandex.st/jquery-ui/1.8.16/jquery-ui.js',
 				'jquery-cookie' => 'http://yandex.st/jquery/cookie/1.0/jquery.cookie.js',
 				'jquery-easing' => 'http://yandex.st/jquery/easing/1.3/jquery.easing.js',
@@ -63,6 +63,7 @@ module Workbench
 		desc 'init', 'Initialize empty project'
 		method_option :js, :type => :array, :default => ['jquery'], :desc => 'Javascript library list'
 		def init
+			puts 'Create empty project'
 			empty_directory 'haml'
 			empty_directory 'sass'
 			empty_directory 'public/css'
@@ -71,12 +72,17 @@ module Workbench
 
 			get 'https://raw.github.com/jonathantneal/normalize.css/master/normalize.min.css', 'sass/_normalize.scss'
 
+			unless options[:js].include? 'jquery'
+				options[:js].push('jquery')
+			end
+
 			options[:js].each do |js|
 				if @js_library[js]
 					get @js_library[js], "public/js/#{File.basename(@js_library[js])}"
 				end
 			end
 
+			copy_file 'scripts.js', 'public/js/scripts.js'
 			copy_file 'style.sass', 'sass/style.sass'
 			copy_file 'index.haml', 'haml/index.haml'
 			copy_file 'Gemfile', 'Gemfile'
