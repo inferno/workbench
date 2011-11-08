@@ -10,8 +10,6 @@ module Workbench
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
 		end
 
-		desc 'help' ,'test'
-
 		desc 'start [--port] [--workers]', 'Start server in current directory'
 		long_desc 'Start server in current directory'
 		method_option :port, :aliases => '-p', :type => :numeric, :default => 4000, :desc => 'Port'
@@ -100,7 +98,6 @@ module Workbench
 			end
 
 		end
-
 
 	end
 
