@@ -4,12 +4,20 @@ module Workbench
 
 		include Thor::Actions
 
+		default_task :start
+
+		map '-T' => 'help'
+		map 'h' => 'help'
+		map 'i' => 'init'
+		map 's' => 'start'
+
 		def self.source_root
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
 		end
 
-		desc 'start', 'Start server'
-		def start
+		desc 'start', 'Start server in current directory'
+		def start_server
+			puts 'Starting HTTP server...'
 			app = Rack::Builder.new {
 				use Rack::Reloader, 0
 				use Rack::CommonLogger
@@ -47,7 +55,7 @@ module Workbench
 		end
 
 		desc 'init', 'Initialize empty project'
-		def init path = ''
+		def init
 			empty_directory 'haml'
 			empty_directory 'sass'
 			empty_directory 'public/css'
