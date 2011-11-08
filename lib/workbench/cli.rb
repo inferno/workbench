@@ -6,6 +6,17 @@ module Workbench
 
 		map '-T' => :help, 'h' => :help, 'i' => :init, 's' => :start
 
+		def initialize *args
+			super
+			@js_library = {
+				'jquery' 				=> 'http://code.jquery.com/jquery.min.js',
+				'jquery-ui' 		=> 'http://yandex.st/jquery-ui/1.8.16/jquery-ui.js',
+				'jquery-cookie' => 'http://yandex.st/jquery/cookie/1.0/jquery.cookie.js',
+				'jquery-easing' => 'http://yandex.st/jquery/easing/1.3/jquery.easing.js',
+				'json' 					=> 'http://yandex.st/json2/2011-01-18/json2.js'
+			}
+		end
+
 		def self.source_root
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
 		end
@@ -60,13 +71,9 @@ module Workbench
 
 			get 'https://raw.github.com/jonathantneal/normalize.css/master/normalize.min.css', 'sass/_normalize.scss'
 
-			library = {
-				'jquery' => 'http://code.jquery.com/jquery.min.js'
-			}
-
 			options[:js].each do |js|
-				if library[js]
-					get library[js], 'public/js/jquery.min.js'
+				if @js_library[js]
+					get @js_library[js], "public/js/#{File.basename(@js_library[js])}"
 				end
 			end
 
