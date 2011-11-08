@@ -4,19 +4,14 @@ module Workbench
 
 		include Thor::Actions
 
-		default_task :start
-
-		map '-T' => 'help'
-		map 'h' => 'help'
-		map 'i' => 'init'
-		map 's' => 'start'
+		map '-T' => :help, 'h' => :help, 'i' => :init, 's' => :start
 
 		def self.source_root
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
 		end
 
 		desc 'start', 'Start server in current directory'
-		def start_server
+		def start
 			puts 'Starting HTTP server...'
 			app = Rack::Builder.new {
 				use Rack::Reloader, 0
@@ -55,6 +50,7 @@ module Workbench
 		end
 
 		desc 'init', 'Initialize empty project'
+		method_option :js, :type => :array, :default => ['jquery'], :desc => 'Javascript library list'
 		def init
 			empty_directory 'haml'
 			empty_directory 'sass'
@@ -63,6 +59,16 @@ module Workbench
 			empty_directory 'public/img'
 
 			get 'https://raw.github.com/jonathantneal/normalize.css/master/normalize.min.css', 'sass/_normalize.scss'
+
+			library = {
+				'jquery' => 'http://code.jquery.com/jquery.min.js'
+			}
+
+			options[:js].each do |js|
+				if library[js]
+					get library[js], 'public/js/jquery.min.js'
+				end
+			end
 
 			copy_file 'style.sass', 'sass/style.sass'
 			copy_file 'index.haml', 'haml/index.haml'
