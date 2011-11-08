@@ -6,22 +6,13 @@ module Workbench
 
 		map '-T' => :help, 'h' => :help, 'i' => :init, 's' => :start
 
-		def initialize *args
-			super
-			@js_library = {
-				'jquery' 				=> 'http://code.jquery.com/jquery.js',
-				'jquery-ui' 		=> 'http://yandex.st/jquery-ui/1.8.16/jquery-ui.js',
-				'jquery-cookie' => 'http://yandex.st/jquery/cookie/1.0/jquery.cookie.js',
-				'jquery-easing' => 'http://yandex.st/jquery/easing/1.3/jquery.easing.js',
-				'json' 					=> 'http://yandex.st/json2/2011-01-18/json2.js'
-			}
-		end
-
 		def self.source_root
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
 		end
 
 		desc 'start', 'Start server in current directory'
+		method_option :port, :type => :numeric, :default => 4000, :desc => 'Port'
+		method_option :workers, :type => :numeric, :default => 4, :desc => 'Workers'
 		def start
 			puts 'Starting HTTP server...'
 			app = Rack::Builder.new {
@@ -54,9 +45,9 @@ module Workbench
 			}.to_app
 
 			Unicorn::HttpServer.new(app, {
-				:listeners => [4000],
+				:listeners => [options[:port]],
 				:preload_app => true,
-				:worker_processes => 4
+				:worker_processes => options[:workers]
 			}).start.join
 		end
 
@@ -76,11 +67,7 @@ module Workbench
 				options[:js].push('jquery')
 			end
 
-			options[:js].each do |js|
-				if @js_library[js]
-					get @js_library[js], "public/js/#{File.basename(@js_library[js])}"
-				end
-			end
+			invoke :js
 
 			copy_file 'scripts.js', 'public/js/scripts.js'
 			copy_file 'style.sass', 'sass/style.sass'
@@ -88,6 +75,28 @@ module Workbench
 			copy_file 'Gemfile', 'Gemfile'
 			copy_file '.rvmrc', '.rvmrc'
 		end
+
+		desc 'js', 'Add javascript library to project'
+		method_option :js, :type => :array, :desc => 'Javascript library list'
+		method_option :list, :default => false
+		def js
+			js_libs = Workbench::JSLibs.list
+
+			if options[:list]
+				puts 'Available JS library'
+				js_libs.each do |index, item|
+					puts " * #{index} => #{item}"
+				end
+			else
+				options[:js].each do |js|
+					if js_libs[js]
+						get js_libs[js], "public/js/#{File.basename(js_libs[js])}"
+					end
+				end if options[:js]
+			end
+
+		end
+
 
 	end
 
