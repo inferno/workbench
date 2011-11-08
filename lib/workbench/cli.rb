@@ -11,8 +11,9 @@ module Workbench
 		end
 
 		desc 'start', 'Start server in current directory'
-		method_option :port, :type => :numeric, :default => 4000, :desc => 'Port'
-		method_option :workers, :type => :numeric, :default => 4, :desc => 'Workers'
+		long_desc 'Start server in current directory'
+		method_option :port, :aliases => '-p', :type => :numeric, :default => 4000, :desc => 'Port', :banner => 'test'
+		method_option :workers, :aliases => '-w', :type => :numeric, :default => 4, :desc => 'Workers', :banner => 'test1'
 		def start
 			puts 'Starting HTTP server...'
 			app = Rack::Builder.new {
@@ -46,8 +47,8 @@ module Workbench
 
 			Unicorn::HttpServer.new(app, {
 				:listeners => [options[:port]],
-				:preload_app => true,
-				:worker_processes => options[:workers]
+				:worker_processes => options[:workers],
+				:preload_app => true
 			}).start.join
 		end
 
