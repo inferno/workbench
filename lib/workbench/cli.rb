@@ -63,7 +63,7 @@ module Workbench
 			empty_directory 'public/js'
 			empty_directory 'public/img'
 
-			get 'https://raw.github.com/jonathantneal/normalize.css/master/normalize.min.css', 'sass/_normalize.scss'
+			copy_file 'normalize.scss', 'sass/normalize.scss'
 
 			unless options[:js].include? 'jquery'
 				options[:js].push('jquery')
