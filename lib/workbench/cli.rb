@@ -10,10 +10,12 @@ module Workbench
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
 		end
 
-		desc 'start', 'Start server in current directory'
+		desc 'help' ,'test'
+
+		desc 'start [--port] [--workers]', 'Start server in current directory'
 		long_desc 'Start server in current directory'
-		method_option :port, :aliases => '-p', :type => :numeric, :default => 4000, :desc => 'Port', :banner => 'test'
-		method_option :workers, :aliases => '-w', :type => :numeric, :default => 4, :desc => 'Workers', :banner => 'test1'
+		method_option :port, :aliases => '-p', :type => :numeric, :default => 4000, :desc => 'Port'
+		method_option :workers, :aliases => '-w', :type => :numeric, :default => 4, :desc => 'Workers'
 		def start
 			puts 'Starting HTTP server...'
 			app = Rack::Builder.new {
@@ -52,8 +54,9 @@ module Workbench
 			}).start.join
 		end
 
-		desc 'init', 'Initialize empty project'
-		method_option :js, :type => :array, :default => ['jquery'], :desc => 'Javascript library list'
+		desc 'init [--js=frameworks]', 'Initialize empty project in current directory'
+		long_desc 'Initialize empty project in current directory'
+		method_option :js, :type => :array, :default => ['jquery'], :desc => 'Install specific JS frameworks', :banner => 'jquery jquery-ui json'
 		def init
 			puts 'Create empty project'
 			empty_directory 'haml'
@@ -77,9 +80,9 @@ module Workbench
 			copy_file '.rvmrc', '.rvmrc'
 		end
 
-		desc 'js', 'Add javascript library to project'
-		method_option :js, :type => :array, :desc => 'Javascript library list'
-		method_option :list, :default => false
+		desc 'js [--js=frameworks]', 'Add javascript library to project'
+		method_option :js, :type => :array, :desc => 'Install specific JS frameworks', :banner => 'jquery jquery-ui json'
+		method_option :list, :default => false, :desc => 'Show available frameworks', :banner => ''
 		def js
 			js_libs = Workbench::JSLibs.list
 
