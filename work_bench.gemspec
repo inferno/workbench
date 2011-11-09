@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "workbench/version"
+require "work_bench/version"
 
 Gem::Specification.new do |s|
   s.name        = "work-bench"

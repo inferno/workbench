@@ -23,7 +23,6 @@ module Workbench
 					content = content.gsub "url('/", "url('"
 					content = content.gsub 'src="/', 'src="'
 				end
-				puts content
 				File.open(path, 'w+') { |f| f.puts content }
 			end
 
