@@ -4,7 +4,7 @@ module Workbench
 
 		include Thor::Actions
 
-		map '-T' => :help, 'h' => :help, 'i' => :init, 's' => :start
+		map '-T' => :help, 'h' => :help, 'i' => :init, 's' => :start, '-v' => :version
 
 		def self.source_root
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
@@ -77,6 +77,11 @@ module Workbench
 		def export path = 'export'
 			export = Workbench::Exporter.new $root, File.join($root, path), options[:fix]
 			export.process
+		end
+
+		desc 'version', 'Show gem version'
+		def version
+			puts "Version: #{Workbench::VERSION}"
 		end
 
 	end
