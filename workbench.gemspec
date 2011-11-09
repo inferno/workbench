@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "rack"
+	s.add_dependency "rack-test"
 	s.add_dependency "unicorn"
 	s.add_dependency "haml"
 	s.add_dependency "compass"

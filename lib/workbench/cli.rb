@@ -10,6 +10,10 @@ module Workbench
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
 		end
 
+		def self.destination_root
+			$root
+		end
+
 		desc 'start [--port] [--workers]', 'Start server in current directory'
 		long_desc 'Start server in current directory'
 		method_option :port, :aliases => '-p', :type => :numeric, :default => 4000, :desc => 'Port'
@@ -95,6 +99,67 @@ module Workbench
 						get js_libs[js], "public/js/#{File.basename(js_libs[js])}"
 					end
 				end if options[:js]
+			end
+		end
+
+		desc 'export [PATH]', 'Export project'
+		def export path = 'export'
+			full_path = "#{$root}/haml"
+			export_path = "#{$root}/#{path}"
+			puts 'Export project'
+			directory "#{$root}/public", path
+			views = glob_path full_path
+			views.reject! { |v| v =~ /(^_|\/_)/ }
+			browser = Rack::Test::Session.new(Rack::MockSession.new(Workbench::Server.new))
+			FileUtils.rm_rf "#{export_path}/.tmp"
+			Dir.mkdir "#{export_path}/.tmp"
+			views.each do |filename|
+				browser.get filename, {}, {'REQUEST_URI' => "http://example.org/#{extract_request_path(filename)}"}
+				response = browser.last_response
+				contents = response.body
+				File.open("#{export_path}/.tmp/#{filename.gsub('.haml', '.html')}", 'w+') { |f| f.puts contents }
+			end
+			directory "#{export_path}/.tmp", export_path
+			FileUtils.rm_rf "#{export_path}/.tmp"
+		end
+
+		no_tasks do
+
+			def glob_path(path, directories = false)
+				result = nil
+				FileUtils.cd(path) do
+					result = Dir.glob("**/*", File::FNM_DOTMATCH)
+					result.reject! { |fn| File.directory?(fn) } unless directories
+					result.reject! { |fn| %r{(^|/)(\.{1,2}|\.empty)$}.match(fn) }
+					result.reject! { |fn| %r{\(.git(/|$)}.match(fn) }
+				end
+				result.sort!
+				result
+			end
+
+			def remove_ext(path)
+				if path =~ /^(.*?)\.[A-Za-z]+[A-Za-z.]*$/
+					$1
+				else
+					path
+				end
+			end
+
+			def extract_ext(path)
+				if path =~ /(\.[A-Za-z]+)\.[A-Za-z]+$/
+					$1
+				elsif path =~ /(\.[A-Za-z]+)$/
+					$1
+				else
+					''
+				end
+			end
+
+			def extract_request_path(filename)
+				result = remove_ext(filename)
+				result = result.sub(/index$/, '')
+				result = result.sub(/\/$/, '')
+				result
 			end
 
 		end
