@@ -2,7 +2,8 @@ module Workbench
 
 	class Exporter
 
-		def initialize src, dest
+		def initialize src, dest, fix = false
+			@fix = fix
 			@src = src
 			@dest = dest
 			@browser = Rack::Test::Session.new(Rack::MockSession.new(Workbench::Application.new.app))
@@ -17,8 +18,17 @@ module Workbench
 
 		private
 
+			def save_file path, content
+				if @fix
+					content = content.gsub "url('/", "url('"
+					content = content.gsub 'src="/', 'src="'
+				end
+				puts content
+				File.open(path, 'w+') { |f| f.puts content }
+			end
+
 			def log_action msg
-				puts msg
+				puts '=> ' + msg
 			end
 
 			def get_url path
@@ -33,7 +43,7 @@ module Workbench
 					ext = File.extname file
 					path = "css/#{file.gsub(ext, '.css')}"
 					body = get_url path
-					File.open("#{@src}/public/#{path}", 'w+') { |f| f.puts body }
+					save_file "#{@src}/public/#{path}", body
 				end
 			end
 
@@ -55,7 +65,7 @@ module Workbench
 					filename = filename.gsub('.haml', '.html')
 					dirname = File.dirname(File.join(@dest, filename))
 					FileUtils.mkdir_p(dirname) unless Dir.exist? dirname
-					File.open("#{@dest}/#{filename}", 'w+') { |f| f.puts body }
+					save_file "#{@dest}/#{filename}", body
 					log_action "Copy #{filename}"
 				end
 			end

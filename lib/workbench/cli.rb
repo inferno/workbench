@@ -73,9 +73,12 @@ module Workbench
 		end
 
 		desc 'export [PATH]', 'Export project'
+		method_option :fix, :type => :boolean, :desc => 'Fix relative urls'
 		def export path = 'export'
-			export = Workbench::Exporter.new $root, File.join($root, path)
+			export = Workbench::Exporter.new $root, File.join($root, path), options[:fix]
 			export.process
 		end
+
+	end
 
 end
