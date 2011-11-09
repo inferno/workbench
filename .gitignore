@@ -1,6 +1,8 @@
 *.gem
 .bundle
 Gemfile.lock
-pkg/*
-.idea/
 .DS_Store
+/pkg
+/.idea
+/doc
+/.yardoc

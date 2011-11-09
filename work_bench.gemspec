@@ -5,11 +5,11 @@ require "work_bench/version"
 Gem::Specification.new do |s|
   s.name        = "work-bench"
   s.version     = Workbench::VERSION
-  s.authors     = ["Konstantin Savelyev"]
-  s.email       = ["konstantin.savelyev@gmail.com"]
+  s.authors     = "Konstantin Savelyev"
+  s.email       = "konstantin.savelyev@gmail.com"
   s.homepage    = "http://lenta.ru"
-  s.summary     = "A quick web server for prototyping."
-  s.description = "A quick web server for prototyping."
+  s.summary     = "A quick and simple local web server for prototyping web applications."
+  s.description = "A quick and simple local web server for prototyping web applications."
 
   s.rubyforge_project = "work-bench"
 
@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
 	s.add_dependency "unicorn"
 	s.add_dependency "haml"
 	s.add_dependency "compass"
-	s.add_dependency "rack-asset-compiler"
 	s.add_dependency "rack-cache"
 	s.add_dependency "rack-contrib"
 	s.add_dependency "thor"
