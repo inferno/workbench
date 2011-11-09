@@ -22,6 +22,7 @@ module Workbench
 				if @fix
 					content = content.gsub "url('/", "url('"
 					content = content.gsub 'src="/', 'src="'
+					content = content.gsub 'href="/', 'href="'
 				end
 				File.open(path, 'w+') { |f| f.puts content }
 			end
