@@ -37,7 +37,7 @@ module Workbench
 			empty_directory 'public/js'
 			empty_directory 'public/img'
 
-			copy_file 'normalize.scss', 'sass/normalize.scss'
+			copy_file '_normalize.scss', 'sass/_normalize.scss'
 
 			unless options[:js].include? 'jquery'
 				options[:js].push('jquery')
