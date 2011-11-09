@@ -21,7 +21,7 @@ module Workbench
 		def start
 			puts 'Starting HTTP server...'
 
-			app = Workbench::App.new
+			app = Workbench::Application.new
 			app.start options[:port], options[:workers]
 
 		end

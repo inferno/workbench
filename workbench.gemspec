@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "workbench/version"
 
 Gem::Specification.new do |s|
-  s.name        = "workbench"
+  s.name        = "work-bench"
   s.version     = Workbench::VERSION
   s.authors     = ["Konstantin Savelyev"]
   s.email       = ["konstantin.savelyev@gmail.com"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "A quick web server for prototyping."
   s.description = "A quick web server for prototyping."
 
-  s.rubyforge_project = "workbench"
+  s.rubyforge_project = "work-bench"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
