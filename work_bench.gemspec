@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = "Konstantin Savelyev"
   s.email       = "konstantin.savelyev@gmail.com"
   s.homepage    = "http://lenta.ru"
-  s.summary     = "A quick and simple local web server for prototyping web applications."
-  s.description = "A quick and simple local web server for prototyping web applications."
+  s.summary     = "A quick and simple local web server for prototyping web applications with HAML, SASS and Compass support."
+  s.description = "A quick and simple local web server for prototyping web applications with HAML, SASS and Compass support."
 
   s.rubyforge_project = "work-bench"
 
