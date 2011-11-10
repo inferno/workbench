@@ -8,7 +8,5 @@ require 'work_bench/renderer'
 require 'work_bench/haml_helpers'
 require 'work_bench/exporter'
 
-$root = ENV['PWD']
-
 Workbench::Cli.start
 

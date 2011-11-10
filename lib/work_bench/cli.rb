@@ -15,9 +15,9 @@ module Workbench
 		method_option :port, :aliases => '-p', :type => :numeric, :default => 4000, :desc => 'Port'
 		method_option :workers, :aliases => '-w', :type => :numeric, :default => 4, :desc => 'Workers'
 		def start path = '.'
-      $root = File.expand_path path
+      path = File.expand_path path
 			puts 'Starting HTTP server...'
-      app = Workbench::Application.new
+      app = Workbench::Application.new path
       app.start options[:port], options[:workers]
 		end
 
@@ -29,7 +29,6 @@ module Workbench
 			puts 'Create empty project'
 
 			self.destination_root = File.expand_path path
-			empty_directory path unless '.' == path
 
 			empty_directory 'haml'
 			empty_directory 'sass'

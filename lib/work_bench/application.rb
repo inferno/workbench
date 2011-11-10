@@ -4,7 +4,7 @@ module Workbench
 
 		attr_reader :app
 
-		def initialize
+		def initialize path
 
 			@app = Rack::Builder.new {
 				use Rack::Reloader, 0
@@ -13,7 +13,7 @@ module Workbench
 				use Rack::ContentLength
 
 				Compass.configuration do |config|
-					config.project_path = $root
+					config.project_path = path
 					config.http_path = '/'
 					config.http_images_path = '/img'
 					config.http_stylesheets_path = '/css'
