@@ -1,6 +1,6 @@
 # Workbench
 
-Workbench is a quick and simple local web server for prototyping web applications and sites. It support HAML, SASS and Compass out of the box.
+Workbench is a quick and simple local web server for prototyping web applications and sites. It supports HAML, SASS and Compass out of the box.
 
 ## Install
 
@@ -8,11 +8,11 @@ The first step is to install the gem:
 
 	gem install work-bench
 
-Workbench come with command line utility `workbench`.
+Workbench comes with command line utility `workbench`.
 
 ## Create first project
 
-Next we need create project.
+Next we need to create project.
 
 	mkdir project
 	cd project
@@ -24,7 +24,7 @@ Inside project directory run:
 
 	workbench start
 
-Now type in the browser `http://localhost:4000`. And you will see the start page.
+Now type in browser `http://localhost:4000`. And you will see the start page.
 
 ## Export prototype
 
@@ -44,13 +44,13 @@ You can specify the JS libraries to be used in your project.
 
 	workbench init --js jquery json
 
-The list of libraries available:
+List of libraries available:
 
 	workbench js
 
 ## normalize.css
 
-You may add awesome [normalize.css](https://github.com/jonathantneal/normalize.css) to project. Just use `--normalize` or `--no-normalize` in options. This feature is **enabled** by default.
+You can add awesome [normalize.css](https://github.com/jonathantneal/normalize.css) to project. Just use `--normalize` or `--no-normalize` in options. This feature is **enabled** by default.
 
 	workbench init --normalize
 
