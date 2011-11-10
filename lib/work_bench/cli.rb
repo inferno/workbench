@@ -49,7 +49,6 @@ module Workbench
 			copy_file 'style.sass', 'sass/style.sass'
 			copy_file 'index.haml', 'haml/index.haml'
 			copy_file 'Gemfile', 'Gemfile'
-			copy_file '.rvmrc', '.rvmrc'
 		end
 
 		desc 'js [--js=frameworks]', 'Add javascript library to project'
