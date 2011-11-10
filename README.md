@@ -1,6 +1,6 @@
 # Workbench
 
-Workbench is a quick and simple local web server for prototyping web applications and sites.
+Workbench is a quick and simple local web server for prototyping web applications and sites. It support HAML, SASS and Compass out the box.
 
 ## Install
 
@@ -23,6 +23,8 @@ Next we need create project.
 Inside project directory run:
 
 	workbench start
+
+Now type in the browser `http://localhost:4000`. And you will see the start page.
 
 ## Export prototype
 
