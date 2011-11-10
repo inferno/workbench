@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Workbench::VERSION
   s.authors     = "Konstantin Savelyev"
   s.email       = "konstantin.savelyev@gmail.com"
-  s.homepage    = "http://lenta.ru"
+  s.homepage    = "https://github.com/inferno/workbench"
   s.summary     = "A quick and simple local web server for prototyping web applications with HAML, SASS and Compass support."
   s.description = "A quick and simple local web server for prototyping web applications with HAML, SASS and Compass support."
 
