@@ -46,8 +46,11 @@ You can specify the JS libraries to be used in your project.
 
 The list of libraries available:
 
-	workbench js --list
+	workbench js
 
-For add JS libraries to existing project in project dir type:
+## normalize.css
 
-	workbench js --js json
+You may add awesome [normalize.css](https://github.com/jonathantneal/normalize.css) to project. Just use `--normalize` or `--no-normalize` in options. This feature is **enable** by default.
+
+	workbench init --normalize
+
