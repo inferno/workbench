@@ -1,6 +1,6 @@
 # Workbench
 
-Workbench is a quick and simple local web server for prototyping web applications and sites. It support HAML, SASS and Compass out the box.
+Workbench is a quick and simple local web server for prototyping web applications and sites. It support HAML, SASS and Compass out of the box.
 
 ## Install
 
@@ -50,7 +50,7 @@ The list of libraries available:
 
 ## normalize.css
 
-You may add awesome [normalize.css](https://github.com/jonathantneal/normalize.css) to project. Just use `--normalize` or `--no-normalize` in options. This feature is **enable** by default.
+You may add awesome [normalize.css](https://github.com/jonathantneal/normalize.css) to project. Just use `--normalize` or `--no-normalize` in options. This feature is **enabled** by default.
 
 	workbench init --normalize
 
