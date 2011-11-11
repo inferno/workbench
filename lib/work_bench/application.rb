@@ -15,6 +15,7 @@ module Workbench
 				use Rack::ShowExceptions
 				use Rack::ContentLength
 
+        # Set config for Compass and SASS
 				Compass.configuration do |config|
 					config.project_path = path
 					config.http_path = '/'
@@ -41,8 +42,8 @@ module Workbench
 
     # Start Unicorn server
     #
-    # @param port [Numeric] port number
-    # @param workers [Number] workers count
+    # @param [Numeric] port port number
+    # @param [Number] workers workers count
 		def start port, workers
 			Unicorn::HttpServer.new(@app, {
 				:listeners => [port],

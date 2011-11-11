@@ -13,7 +13,7 @@ module Workbench
 
     # Start Unicorn server
     #
-    # @param [String] path path to new project directory
+    # @param [String] path path to project directory
     #
     # @example
     #  workbench start
@@ -27,7 +27,7 @@ module Workbench
 		method_option :workers, :aliases => '-w', :type => :numeric, :default => 4, :desc => 'Workers'
 		def start path = '.'
       path = File.expand_path path
-			puts 'Starting HTTP server...'
+			puts 'Starting HTTP server...'.color(:green)
       app = Workbench::Application.new path
       app.start options[:port], options[:workers]
 		end
@@ -42,12 +42,12 @@ module Workbench
     # @example
     #  workbench init project/
     #
-		desc 'init [PATH] [--js=frameworks]', 'Initialize empty project in current directory'
-		long_desc 'Initialize empty project in current directory'
+		desc 'init [PATH] [--js=frameworks]', 'Initialize empty project'
+		long_desc 'Initialize empty project'
 		method_option :js, :type => :array, :default => ['jquery'], :desc => 'Install specific JS frameworks', :banner => 'jquery jquery-ui json'
 		method_option :normalize, :type => :boolean, :default => true, :desc => 'Add _normalize.css (https://github.com/jonathantneal/normalize.css)'
 		def init path = '.'
-			puts 'Create empty project'
+			puts 'Create empty project'.color(:green)
 
 			self.destination_root = File.expand_path path
 
@@ -81,10 +81,10 @@ module Workbench
     # Export project to specific directory
     #
     # @param [String] path export directory
-		desc 'export [PATH]', 'Export project'
-		method_option :fix, :type => :boolean, :desc => 'Fix relative urls'
+		desc 'export [PATH] [--fix-urls]', 'Export project'
+		method_option :fix_urls, :type => :boolean, :default => true, :desc => 'Fix relative server urls'
 		def export path = 'export'
-  		export = Workbench::Exporter.new File.expand_path('.'), File.join(File.expand_path('.'), path), options[:fix]
+  		export = Workbench::Exporter.new File.expand_path('.'), File.join(File.expand_path('.'), path), options[:fix_urls]
 			export.process
 		end
 
