@@ -1,0 +1,3 @@
+source "http://rubygems.org"
+
+gem 'work-bench', :path => File.join(File.dirname(__FILE__), '..', '..', '..')

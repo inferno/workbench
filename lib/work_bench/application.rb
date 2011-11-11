@@ -35,7 +35,7 @@ module Workbench
 				use Sass::Plugin::Rack
 				use Rack::StaticCache, :urls => [ '/css', '/js', '/img', '/favicon.ico' ], :root => './public', :versioning => false
 
-				run Workbench::Server.new path
+				run Workbench::DynamicHandler.new path
 			}.to_app
 		end
 
