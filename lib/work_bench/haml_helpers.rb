@@ -7,7 +7,7 @@ module Haml
 			template = template + '.haml'
 			template_dir = File.dirname(template)
 			basename = File.basename(template)
-			Workbench::Renderer.new(File.join(dir, template_dir, "_#{basename}")).render
+      Workbench::HamlRenderer.render File.join(dir, template_dir, "_#{basename}")
 		end
 
 	end
