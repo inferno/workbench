@@ -1,11 +1,14 @@
 module Workbench
 
+  # Web-server class
 	class Application
 
 		attr_reader :app
 
+    # Initialize class
+    #
+    # @param [String] path path to working directory
 		def initialize path
-
 			@app = Rack::Builder.new {
 				use Rack::Reloader, 0
 				use Rack::CommonLogger
@@ -36,6 +39,10 @@ module Workbench
 			}.to_app
 		end
 
+    # Start Unicorn server
+    #
+    # @param port [Numeric] port number
+    # @param workers [Number] workers count
 		def start port, workers
 			Unicorn::HttpServer.new(@app, {
 				:listeners => [port],

@@ -1,5 +1,6 @@
 module Workbench
 
+  # CLI application for Workbench
 	class Cli < Thor
 
 		include Thor::Actions
@@ -10,6 +11,16 @@ module Workbench
 			File.join(File.dirname(__FILE__), '..', '..', 'template')
 		end
 
+    # Start Unicorn server
+    #
+    # @param [String] path path to new project directory
+    #
+    # @example
+    #  workbench start
+    #
+    # @example
+    #  workbench start project/
+    #
 		desc 'start [PATH] [--port] [--workers]', 'Start server in current directory'
 		long_desc 'Start server in current directory'
 		method_option :port, :aliases => '-p', :type => :numeric, :default => 4000, :desc => 'Port'
@@ -21,6 +32,16 @@ module Workbench
       app.start options[:port], options[:workers]
 		end
 
+    # Create empty project from template in current directory or specific path
+    #
+    # @param [String] path path to new project directory
+    #
+    # @example
+    #  workbench init
+    #
+    # @example
+    #  workbench init project/
+    #
 		desc 'init [PATH] [--js=frameworks]', 'Initialize empty project in current directory'
 		long_desc 'Initialize empty project in current directory'
 		method_option :js, :type => :array, :default => ['jquery'], :desc => 'Install specific JS frameworks', :banner => 'jquery jquery-ui json'
@@ -42,9 +63,9 @@ module Workbench
 
 			unless options[:js].include? 'jquery'
 				options[:js].push('jquery')
-			end
+      end
 
-			js_libs = Workbench::JSLibs.list
+			js_libs = Workbench::JSLibs::LIST
 			options[:js].each do |js|
 				if js_libs[js]
 					get js_libs[js], "public/js/#{File.basename(js_libs[js])}"
@@ -57,25 +78,35 @@ module Workbench
 			copy_file 'Gemfile', 'Gemfile'
 		end
 
-		desc 'js', 'Show available frameworks'
-		def js
-			js_libs = Workbench::JSLibs.list
-      puts 'Available JS library'
-      js_libs.each do |index, item|
-        puts " * #{index} => #{item}"
-      end
-		end
-
+    # Export project to specific directory
+    #
+    # @param [String] path export directory
 		desc 'export [PATH]', 'Export project'
 		method_option :fix, :type => :boolean, :desc => 'Fix relative urls'
 		def export path = 'export'
-			export = Workbench::Exporter.new $root, File.join($root, path), options[:fix]
+  		export = Workbench::Exporter.new File.expand_path('.'), File.join(File.expand_path('.'), path), options[:fix]
 			export.process
 		end
 
+    # Get available JS frameworks
+    #
+    # @example
+    #  workbench js
+    #
+    desc 'js', 'Show available JS frameworks'
+    def js
+      puts 'Available JS frameworks'.color(:green)
+      Workbench::JSLibs::LIST.each { |index, item| puts " * #{index.color(:blue)} => #{item}" }
+    end
+
+    # Get version number
+    #
+    # @example
+    #  workbench version
+    #
 		desc 'version', 'Show gem version'
 		def version
-			puts "Version: #{Workbench::VERSION}"
+			puts "Version: #{Workbench::VERSION.color(:blue)}"
 		end
 
 	end

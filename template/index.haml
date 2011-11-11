@@ -3,7 +3,7 @@
 	%head
 		%meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
 		%title Example project
-		<%- l = Workbench::JSLibs.list -%>
+		<%- l = Workbench::JSLibs::LIST -%>
 		<%- unless options[:js].empty? then -%>
 		<%- options[:js].each do |lib| -%>
 		%script{:src => "/js/<%= File.basename(l[lib]) %>", :type => "text/javascript"}

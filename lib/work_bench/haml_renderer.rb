@@ -1,17 +1,15 @@
 module Workbench
 
+  # Parse HAML file with options
   class HamlRenderer
 
-    @options = {
+    DEFAULT_HAML_OPTIONS = {
       :escape_attrs => true,
       :attr_wrapper => '"',
       :format => :html4
     }
 
     class << self
-
-      # @return [Hash] the list of options
-      attr_accessor :options
 
       # Parse HAML file with options
       #
@@ -23,8 +21,7 @@ module Workbench
       #   result = Workbench::HamlRenderer.render 'index.haml', { :attr_wrapper => "'", :escape_attrs => false }
       #
       def render filename, options = {}
-        options = @options.merge(options)
-        Haml::Engine.new(File.read(filename), options).render
+        Haml::Engine.new(File.read(filename), DEFAULT_HAML_OPTIONS.merge(options)).render
       end
 
     end
