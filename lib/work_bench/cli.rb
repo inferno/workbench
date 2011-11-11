@@ -61,16 +61,14 @@ module Workbench
 				copy_file '_normalize.scss', 'sass/_normalize.scss'
 			end
 
-			unless options[:js].include? 'jquery'
-				options[:js].push('jquery')
+			if options[:js] && !options[:js].empty?
+        js_libs = Workbench::JSLibs::LIST
+        options[:js].each do |js|
+          if js_libs[js]
+            get js_libs[js], "public/js/#{File.basename(js_libs[js])}"
+          end
+        end
       end
-
-			js_libs = Workbench::JSLibs::LIST
-			options[:js].each do |js|
-				if js_libs[js]
-					get js_libs[js], "public/js/#{File.basename(js_libs[js])}"
-				end
-			end unless options[:js].empty?
 
 			copy_file 'scripts.js', 'public/js/scripts.js'
 			template 'style.sass', 'sass/style.sass'
