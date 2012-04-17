@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Workbench by inferno</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Workbench</h1>
+        <p>A quick and simple local web server for prototyping web applications.</p>
+        <p class="view"><a href="https://github.com/inferno/workbench">View the Project on GitHub <small>inferno/workbench</small></a></p>
+        <ul>
+          <li><a href="https://github.com/inferno/workbench/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/inferno/workbench/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/inferno/workbench">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Workbench is a quick and simple local web server for prototyping web applications and sites. It supports HAML, SASS and Compass out of the box.</p>
+
+<h2>Install</h2>
+
+<p>The first step is to install the gem:</p>
+
+<pre><code>gem install work-bench
+</code></pre>
+
+<p>Workbench comes with command line utility <code>workbench</code>.</p>
+
+<h2>Create first project</h2>
+
+<p>Next we need to create project.</p>
+
+<pre><code>mkdir project
+cd project
+workbench init
+</code></pre>
+
+<h2>Start server</h2>
+
+<p>Inside project directory run:</p>
+
+<pre><code>workbench start
+</code></pre>
+
+<p>Now type in browser <code>http://localhost:4000</code>. And you will see the start page.</p>
+
+<h2>Export prototype</h2>
+
+<p>You can export your work using:</p>
+
+<pre><code>workbench export
+</code></pre>
+
+<p>By default the project will export to a folder <code>export</code>.</p>
+
+<h2>Help</h2>
+
+<p>Type <code>workbench</code> for more help and options.</p>
+
+<h2>Additional features</h2>
+
+<p>You can specify the JS libraries to be used in your project.</p>
+
+<pre><code>workbench init --js jquery json
+</code></pre>
+
+<p>List of libraries available:</p>
+
+<pre><code>workbench js
+</code></pre>
+
+<h2>normalize.css</h2>
+
+<p>You can add awesome <a href="https://github.com/jonathantneal/normalize.css">normalize.css</a> to project. Just use <code>--normalize</code> or <code>--no-normalize</code> in options. This feature is <strong>enabled</strong> by default.</p>
+
+<pre><code>workbench init --normalize
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/inferno">inferno</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-1139781-12");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
